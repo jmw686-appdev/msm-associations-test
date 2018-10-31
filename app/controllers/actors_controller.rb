@@ -7,7 +7,8 @@ class ActorsController < ApplicationController
 
   def show
     @actor = Actor.find(params.fetch("id_to_display"))
-
+    # @c = Character.find_by(actor_id: @actor.id)
+    @movies = Movie.where(id: Character.find_by(actor_id: @actor.id).movie_id)
     render("actor_templates/show.html.erb")
   end
 
@@ -48,8 +49,8 @@ class ActorsController < ApplicationController
   def destroy_row
     @actor = Actor.find(params.fetch("id_to_remove"))
 
+    # Character.find_by(actor_id: @actor.id).destroy
     @actor.destroy
-
     redirect_to("/actors", :notice => "Actor deleted successfully.")
   end
 end

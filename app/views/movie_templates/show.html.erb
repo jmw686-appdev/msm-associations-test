@@ -44,6 +44,13 @@
     <img src="<%= @movie.image_url %>" width="320">
   </dd>
 
+  <dt>
+    Director
+  </dt>
+  <dd>
+    <%= @movie.director.name %>
+  </dd>
+
 </dl>
 
 <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger">
@@ -55,3 +62,49 @@
 <a href="/movies">
   Go back
 </a>
+
+<div>
+  <div>
+    Cast
+  </div>
+  <ul>
+    <% @characters.each do |chara|%>
+      <li>
+        <%= link_to Actor.find(chara.actor_id).name, actor_path(chara.actor_id) %>
+        (<%= chara.name %>)
+      </li>
+    <% end %>
+  </ul>
+  <div>
+    Add a new character to this movie
+  </div>
+  <ul>
+    <li>
+
+<form action="/create_character" method="post">
+  <!-- Label and input for actor_id -->
+  <div class="form-group">
+    <label for="actor_id">
+      Actor
+    </label>
+
+    <%= select_tag("actor_id", options_from_collection_for_select(Actor.all, :id, :name, Character.find_by(movie_id: @movie.id).try(:actor_id)), :class => "form-control") %>  </div>
+
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" >
+    <input type="hidden" id="movie_id" name="movie_id" class="form-control" value="<%= @movie.id %>">
+  </div>
+  or <%= link_to "add a new actor", actors_new_path %> first
+  <button class="btn btn-block btn-outline-secondary">
+    Create character
+  </button>
+</form>
+
+    </li>
+  </ul>
+</div>

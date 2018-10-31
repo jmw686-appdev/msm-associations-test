@@ -49,6 +49,9 @@
 
     <input type="text" id="image_url" name="image_url" class="form-control" value="<%= @movie.image_url %>">
   </div>
+  
+  <%= select_tag("director_id", options_from_collection_for_select(Director.all, :id, :name, @movie.try(:director_id)), :class => "form-control") %>
+  or <%= link_to 'add a new director', directors_new_path %> first
 
   <button class="btn btn-block btn-outline-secondary">
     Update movie

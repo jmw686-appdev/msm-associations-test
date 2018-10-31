@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # Routes for the Character resource:
+
+  # CREATE
+  get("/characters/new", { :controller => "characters", :action => "new_form" })
+  post("/create_character", { :controller => "characters", :action => "create_row" })
+
+  # READ
+  get("/characters", { :controller => "characters", :action => "index" })
+  get("/characters/:id_to_display", { :controller => "characters", :action => "show" })
+
+  # UPDATE
+  get("/characters/:prefill_with_id/edit", { :controller => "characters", :action => "edit_form" })
+  post("/update_character/:id_to_modify", { :controller => "characters", :action => "update_row" })
+
+  # DELETE
+  get("/delete_character/:id_to_remove", { :controller => "characters", :action => "destroy_row" })
+
+  #------------------------------
+
   # Routes for the Movie resource:
 
   get("/", { :controller => "movies", :action => "index" })
@@ -9,7 +28,7 @@ Rails.application.routes.draw do
 
   # READ
   get("/movies", { :controller => "movies", :action => "index" })
-  get("/movies/:id_to_display", { :controller => "movies", :action => "show" })
+  get("/movies/:id_to_display", { :controller => "movies", :action => "show", :as => "movie"})
 
   # UPDATE
   get("/movies/:prefill_with_id/edit", { :controller => "movies", :action => "edit_form" })
@@ -28,7 +47,7 @@ Rails.application.routes.draw do
 
   # READ
   get("/directors", { :controller => "directors", :action => "index" })
-  get("/directors/:id_to_display", { :controller => "directors", :action => "show" })
+  get("/directors/:id_to_display", { :controller => "directors", :action => "show", :as => "director" })
 
   # UPDATE
   get("/directors/:prefill_with_id/edit", { :controller => "directors", :action => "edit_form" })
@@ -47,14 +66,14 @@ Rails.application.routes.draw do
 
   # READ
   get("/actors", { :controller => "actors", :action => "index" })
-  get("/actors/:id_to_display", { :controller => "actors", :action => "show" })
+  get("/actors/:id_to_display", { :controller => "actors", :action => "show", :as => "actor"})
 
   # UPDATE
   get("/actors/:prefill_with_id/edit", { :controller => "actors", :action => "edit_form" })
   get("/update_actor/:id_to_modify", { :controller => "actors", :action => "update_row" })
 
   # DELETE
-  get("/delete_actor/:id_to_remove", { :controller => "actors", :action => "destroy_row" })
+  get("/delete_actor/:id_to_remove", { :controller => "actors", :action => "destroy_row", :as => "delete_actor" })
 
   #------------------------------
 

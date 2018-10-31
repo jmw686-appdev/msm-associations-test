@@ -29,6 +29,10 @@
     <th>
       Description
     </th>
+    
+    <th>
+      Director
+    </th>
 
     <th>
     </th>
@@ -54,6 +58,10 @@
 
     <td>
       <%= movie.description %>
+    </td>    
+    
+    <td>
+      <%= link_to Director.find(movie.director_id).name, director_path(movie.director_id) %>
     </td>
 
     <td>
